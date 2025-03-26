@@ -85,5 +85,9 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+1. In this case, we mostly read the notifications (e.g., calling list_all_as_string()), and only occasionally add new notifications (add()). RwLock<> allows multiple readers simultaneously, which improves performance when many threads need to read notifications. RwLock<> only locks writes exclusively, meaning adding a notification will block readers, but readers will not block each other. A Mutex<> only allows one thread at a time, meaning even read operations would need to wait if another thread is holding the lock. This reduces concurrency and harms performance, especially if reading is frequent.
 
+2. Rust enforces safe memory access at compile time through ownership, borrowing, and lifetimes. If Rust allowed mutable static variables like Java, it could lead to Data races when multiple threads modify the static variable simultaneously, Undefined behavior if memory is accessed concurrently without proper synchronization, Difficult debugging since changes to static variables affect all parts of the program.
+
+Thus, in Rust, all static variables must be immutable by default:
 #### Reflection Subscriber-2
