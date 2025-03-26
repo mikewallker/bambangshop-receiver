@@ -91,3 +91,19 @@ This is the place for you to write reflections:
 
 Thus, in Rust, all static variables must be immutable by default:
 #### Reflection Subscriber-2
+1. I haven't explored it yet due to time constraints, and Rust feels quite unfamiliar to me, which makes it a bit overwhelming. I prefer to learn step by step, and so far, I haven't set aside time for learning beyond the tutorial like those on lib.rs.
+
+2. The Observer Pattern in this tutorial provides a highly extensible and flexible mechanism for adding new subscribers:
+
+    - The SubscriberRepository::list_all(product_type) method allows easy retrieval of all subscribers for a specific product type
+    - The notify() method automatically broadcasts notifications to all registered subscribers
+    - Adding a new subscriber is as simple as registering it in the SubscriberRepository
+    - No modifications to existing code are required when adding new subscribers
+     
+    Multiple App Instances Considerations:
+
+    The current implementation uses local repositories, which might create challenges with multiple app instances
+
+    To make the system truly scalable across multiple instances, we'd need a centralized subscriber registry (potentially using a distributed database), a message queue system for notification distribution, and unique identifiers to prevent duplicate notifications
+
+3. No, i have not because of time constraints. But i know it will be useful in my group projects, some of the benefits i know it ensures API responses return expected status codes and data, automates regression testing, preventing unexpected changes from breaking the API, and it also helps verify business logic, like checking if subscribers are correctly added in our notification system. 
